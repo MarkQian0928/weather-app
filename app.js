@@ -2,6 +2,8 @@
 const request = require('request');
 const yargs = require('yargs');
 
+const geocode = require('./geocode/geocode');
+
 const input = yargs.options({
     address:{
         demand: true, //在terminal里输入的时候，必须要有这个
@@ -15,6 +17,7 @@ const input = yargs.options({
 .alias('help', 'h')
 .argv;
 
+<<<<<<< HEAD
 //console.log(input);
 var encodeAddress = encodeURIComponent(input.address);
 
@@ -38,6 +41,15 @@ request({
         //output only oneline of address, output the specific code that you need
         console.log(`Address: ${body.results[0].formatted_address}`);
         console.log(`latitude: ${body.results[0].geometry.location.lat}`)
+=======
+//在geocode文件里，geocodeAddress = (address, callback)， input.address 等于address; (errowMessage, result)=callback
+geocode.geocodeAddress(input.address,(errowMessage, result)=>{
+    if(errowMessage){
+        console.log(errowMessage);
+>>>>>>> callback
     }
-    
+    else{
+        console.log(JSON.stringify(result, undefined,2));
+    }
 });
+
